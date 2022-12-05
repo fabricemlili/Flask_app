@@ -16,5 +16,9 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
  gtag('js', new Date());
  gtag('config', 'UA-250903244-1');
 </script>
+<button class="favorite styled"
+        type="button">
+    Connect you bitches
+</button>
  """
  return prefix_google + "Hello World"
