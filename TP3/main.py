@@ -28,7 +28,7 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
 
 from pytrends.request import TrendReq
 import pandas as pd
-#from datetime import datetime
+from datetime import datetime
 
 @app.route('/trend', methods=["GET"])
 def trend():
@@ -40,7 +40,7 @@ def trend():
     df = pytrends.interest_over_time()
     yahoo_data = df['Yahoo'].values.tolist()
     google_data = df['Google'].values.tolist()
-    dates = df.index.values.tolist()
+    dates = [datetime.fromtimestamp(int(date/1e9)).date().isoformat() for date in df.index.values.tolist()]
 
     params = {
         "type": 'line',
