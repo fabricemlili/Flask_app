@@ -1,0 +1,1 @@
+{"id":"8d3cfb59-4f67-4507-ae3e-ba4c5d6ed4f8","space":41649,"runtime":"python3.9","name":"TP3","path":"u0f4qj","project":"a042kw4k","account":"144798365827","region":"eu-central-1","deps":["flask","pytrends","datetime"],"envs":null,"public":true,"log_level":"debug","cron":""}
