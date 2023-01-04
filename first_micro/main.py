@@ -60,10 +60,12 @@ function myFunction(){
 from flask import Flask, render_template
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
+import os
+
+VIEW_ID = os.getenv('VIEW_ID')
 
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 KEY_FILE_LOCATION = 'data-sources-373514-95e8e4622a9d.json'
-VIEW_ID = '281188353' #You can find this in Google Analytics > Admin > Property > View > View Settings (VIEW ID)
 
 
 def initialize_analyticsreporting():

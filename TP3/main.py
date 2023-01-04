@@ -117,6 +117,7 @@ def counter():
     print(word_count_counter)
     return f"{word_count_dict}<br><br><br>     {word_count_counter}"
 
+@log_execution_time
 def count_words_dict(text):
     word_count = {}
     for word in text.split():
@@ -126,6 +127,7 @@ def count_words_dict(text):
             word_count[word] = 1
     return word_count
 
+@log_execution_time
 def count_words_counter(text):
     return Counter(text.split())
 
