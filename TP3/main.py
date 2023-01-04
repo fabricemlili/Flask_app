@@ -20,7 +20,6 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
 </script>
 <a href="/trend">Google Trend</a><br>
 <a href="/counter">Counter</a><br>
-<a href="/time-execution">Log Time Execution</a><br>
  """
     return prefix_google
 
@@ -96,28 +95,22 @@ def trend():
 import time
 from collections import Counter
 
-def log_execution_time(func):
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter()
-        result = func(*args, **kwargs)
-        end = time.perf_counter()
-        print(f"Execution time: {end - start:.6f} seconds")
-        return result
-    return wrapper
 
 @app.route('/counter')
-@log_execution_time
 def counter():
+    prefix_google = """<a href="/">Home</a><br>"""
     # Download Shakespear artwork
     with open('shakespeare.txt', 'r') as f:
         text = f.read()
+    start_time = time.time()
     word_count_dict = count_words_dict(text)
+    f1 = f"The time to compute with dict is {time.time() - start_time}"
+    start_time = time.time()
     word_count_counter = count_words_counter(text)
-    print(word_count_dict)
-    print(word_count_counter)
-    return f"{word_count_dict}<br><br><br>     {word_count_counter}"
+    f2 = f"The time to compute with Counter function is {time.time() - start_time}"
+    return prefix_google + f"""{f1}<br><br><br>{f2}<br><br><br><br><br>{word_count_dict}<br><br><br><br><br>   {word_count_counter}"""
 
-@log_execution_time
+
 def count_words_dict(text):
     word_count = {}
     for word in text.split():
@@ -127,7 +120,7 @@ def count_words_dict(text):
             word_count[word] = 1
     return word_count
 
-@log_execution_time
+
 def count_words_counter(text):
     return Counter(text.split())
 

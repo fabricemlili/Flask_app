@@ -24,7 +24,6 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
 </script>
 <a href="/logger">Logger</a>
 <a href="/visitors"> Number of visitors</a>
-<a href="/trend"> Trend</a>
  """
     print("watch out!")
     return prefix_google + "Hello World"
@@ -33,7 +32,6 @@ src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
 @app.route('/logger', methods=["GET"])
 def logger():
     prefix_google = """
- <!-- Google tag (gstag.js) -->
 <script>
  console.log('Watch out!')
 </script>
@@ -61,8 +59,12 @@ from flask import Flask, render_template
 from apiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 import os
+from dotenv import load_dotenv
 
-VIEW_ID = os.getenv('VIEW_ID')
+load_dotenv()
+
+VIEW_ID = os.getenv('VIEW_ID') # Internal Server Error
+VIEW_ID = "281188353"
 
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 KEY_FILE_LOCATION = 'data-sources-373514-95e8e4622a9d.json'
@@ -111,18 +113,7 @@ def visitors():
   response = get_report(analytics)
   visitors = get_visitors(response)
 
-  prefix_google = """
-    <!-- Google tag (gtag.js) -->
-    <script async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-250903244-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-250903244-1');
-    </script>"""
-
-  return prefix_google + "The number of visitors this last month is " + str(visitors)
+  return "The number of visitors this last month is " + str(visitors)
 
 
 
